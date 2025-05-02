@@ -45,7 +45,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 #include <unistd.h>
-
+#include <sys/ioctl.h>
 
 #define I2C_ADDRESS 0x14
 #define I2C_APP_PIPE_DEPTH 32 /* Depth of the Command Pipe for Application */

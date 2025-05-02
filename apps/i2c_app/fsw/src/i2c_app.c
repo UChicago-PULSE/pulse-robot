@@ -29,8 +29,10 @@
 #include "i2c_app.h"
 #include "i2c_app_table.h"
 
+
 /* The sample_lib module provides the SAMPLE_LIB_Function() prototype */
 #include <string.h>
+#include <linux/i2c-dev.h>
 
 /*
 ** global data
@@ -45,11 +47,19 @@ CFE_Status_t I2C_OPEN_BUS(int bus_num, int* fd) {
     if (*fd < 0) {
         perror("Opening I2C bus");
         return CFE_STATUS_EXTERNAL_RESOURCE_FAIL;
+    } 
+    OS_TaskDelay(100);
+    if (ioctl(*fd, I2C_SLAVE, 14) < 0){
+        return CFE_STATUS_EXTERNAL_RESOURCE_FAIL;
     }
+    CFE_EVS_SendEvent(I2C_APP_STARTUP_INF_EID, CFE_EVS_EventType_INFORMATION, "I2C BUS: %d", *fd);
+
+
     return CFE_SUCCESS;
 }
 
 CFE_Status_t I2C_APP_Send(int fd, I2C_Command_Packet* packet) {
+    OS_TaskDelay(100);
     ssize_t res = write(fd, (const void*) packet, sizeof(I2C_Command_Packet));
     if (res == -1) {
         perror("Error sending app");
