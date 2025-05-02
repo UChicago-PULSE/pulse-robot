@@ -17,13 +17,13 @@
  ************************************************************************/
 
 #include "cfe_tbl_filedef.h" /* Required to obtain the CFE_TBL_FILEDEF macro definition */
-#include "sample_app_table.h"
+#include "i2c_app_table.h"
 
 /*
 ** The following is an example of the declaration statement that defines the desired
 ** contents of the table image.
 */
-SAMPLE_APP_Table_t SampleAppTable = {1, 2};
+I2C_APP_Table_t SampleAppTable = {1, 2};
 
 /*
 ** The macro below identifies:
@@ -32,4 +32,4 @@ SAMPLE_APP_Table_t SampleAppTable = {1, 2};
 **    3) a brief description of the contents of the file image
 **    4) the desired name of the table image binary file that is cFE compatible
 */
-CFE_TBL_FILEDEF(SampleAppTable, SAMPLE_APP.SampleAppTable, Table Utility Test Table, sample_app_tbl.tbl)
+CFE_TBL_FILEDEF(SampleAppTable, I2C_APP.SampleAppTable, Table Utility Test Table, sample_app_tbl.tbl)

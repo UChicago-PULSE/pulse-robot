@@ -19,18 +19,18 @@
 /**
  * @file
  *
- * Define SAMPLE App  Messages and info
+ * Define I2C App  Messages and info
  */
 
-#ifndef SAMPLE_APP_MSG_H
-#define SAMPLE_APP_MSG_H
+#ifndef I2C_APP_MSG_H
+#define I2C_APP_MSG_H
 
 /*
-** SAMPLE App command codes
+** I2C App command codes
 */
-#define SAMPLE_APP_NOOP_CC           0
-#define SAMPLE_APP_RESET_COUNTERS_CC 1
-#define SAMPLE_APP_PROCESS_CC        2
+#define I2C_APP_NOOP_CC           0
+#define I2C_APP_RESET_COUNTERS_CC 1
+#define I2C_APP_PROCESS_CC        2
 
 /*************************************************************************/
 
@@ -40,7 +40,7 @@
 typedef struct
 {
     CFE_MSG_CommandHeader_t CmdHeader; /**< \brief Command header */
-} SAMPLE_APP_NoArgsCmd_t;
+} I2C_APP_NoArgsCmd_t;
 
 /*
 ** The following commands all share the "NoArgs" format
@@ -49,13 +49,13 @@ typedef struct
 ** allows them to change independently in the future without changing the prototype
 ** of the handler function
 */
-typedef SAMPLE_APP_NoArgsCmd_t SAMPLE_APP_NoopCmd_t;
-typedef SAMPLE_APP_NoArgsCmd_t SAMPLE_APP_ResetCountersCmd_t;
-typedef SAMPLE_APP_NoArgsCmd_t SAMPLE_APP_ProcessCmd_t;
+typedef I2C_APP_NoArgsCmd_t I2C_APP_NoopCmd_t;
+typedef I2C_APP_NoArgsCmd_t I2C_APP_ResetCountersCmd_t;
+typedef I2C_APP_NoArgsCmd_t I2C_APP_ProcessCmd_t;
 
 /*************************************************************************/
 /*
-** Type definition (SAMPLE App housekeeping)
+** Type definition (I2C App housekeeping)
 */
 
 typedef struct
@@ -63,12 +63,12 @@ typedef struct
     uint8 CommandErrorCounter;
     uint8 CommandCounter;
     uint8 spare[2];
-} SAMPLE_APP_HkTlm_Payload_t;
+} I2C_APP_HkTlm_Payload_t;
 
 typedef struct
 {
     CFE_MSG_TelemetryHeader_t  TelemetryHeader; /**< \brief Telemetry header */
-    SAMPLE_APP_HkTlm_Payload_t Payload;         /**< \brief Telemetry payload */
-} SAMPLE_APP_HkTlm_t;
+    I2C_APP_HkTlm_Payload_t Payload;         /**< \brief Telemetry payload */
+} I2C_APP_HkTlm_t;
 
-#endif /* SAMPLE_APP_MSG_H */
+#endif /* I2C_APP_MSG_H */

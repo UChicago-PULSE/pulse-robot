@@ -13,11 +13,11 @@ SET(CMAKE_SYSTEM_VERSION		1)
 SET(CMAKE_SYSTEM_PROCESSOR		arm)
 
 # adjust these settings to where the cross compiler actually resides
-SET(CMAKE_C_COMPILER			"/opt/x-tools/arm-cortexa8_neon-linux-gnueabi/bin/arm-cortexa8_neon-linux-gnueabi-gcc")
-SET(CMAKE_CXX_COMPILER			"/opt/x-tools/arm-cortexa8_neon-linux-gnueabi/bin/arm-cortexa8_neon-linux-gnueabi-g++")
+SET(CMAKE_C_COMPILER			"/bin/arm-linux-gnueabihf-gcc")
+SET(CMAKE_CXX_COMPILER			"/bin/arm-linux-gnueabihf-g++")
 
 # where is the target environment
-SET(CMAKE_FIND_ROOT_PATH		"/opt/x-tools/arm-cortexa8_neon-linux-gnueabi/arm-cortexa8_neon-linux-gnueabi/sysroot")
+SET(CMAKE_FIND_ROOT_PATH		"/usr/arm-linux-gnueabihf")
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM	NEVER)

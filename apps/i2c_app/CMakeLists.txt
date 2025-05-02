@@ -1,16 +1,12 @@
-project(CFE_SAMPLE_APP C)
+project(I2C_APP C)
 
 # Create the app module
-add_cfe_app(sample_app fsw/src/sample_app.c)
-
-# Include the public API from sample_lib to demonstrate how
-# to call library-provided functions
-add_cfe_app_dependency(sample_app sample_lib)
+add_cfe_app(i2c_app fsw/src/i2c_app.c)
 
 # Add table
-add_cfe_tables(sample_app fsw/tables/sample_app_tbl.c)
+add_cfe_tables(i2c_app fsw/tables/sample_app_tbl.c)
 
-target_include_directories(sample_app PUBLIC
+target_include_directories(i2c_app PUBLIC
   fsw/mission_inc
   fsw/platform_inc
 )

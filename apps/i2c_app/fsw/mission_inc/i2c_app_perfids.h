@@ -19,19 +19,12 @@
 /**
  * @file
  *
- * Define sample app table
+ * Define I2C App Performance IDs
  */
 
-#ifndef SAMPLE_APP_TABLE_H
-#define SAMPLE_APP_TABLE_H
+#ifndef I2C_APP_PERFIDS_H
+#define I2C_APP_PERFIDS_H
 
-/*
-** Table structure
-*/
-typedef struct
-{
-    uint16 Int1;
-    uint16 Int2;
-} SAMPLE_APP_Table_t;
+#define I2C_APP_PERF_ID 91
 
-#endif /* SAMPLE_APP_TABLE_H */
+#endif /* SAMPLE_APP_PERFIDS_H */
