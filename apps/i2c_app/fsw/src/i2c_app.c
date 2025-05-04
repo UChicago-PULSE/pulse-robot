@@ -59,14 +59,15 @@ CFE_Status_t I2C_OPEN_BUS(int bus_num, int* fd) {
 }
 
 CFE_Status_t I2C_APP_Send(int fd, I2C_Command_Packet* packet) {
-    OS_TaskDelay(100);
-    ssize_t res = write(fd, (const void*) packet, sizeof(I2C_Command_Packet));
-    if (res == -1) {
-        perror("Error sending app");
+    uint8_t buffer[I2C_CMD_PACKET_SIZE + 1] = {0};
+    memcpy(buffer + 1, packet, I2C_CMD_PACKET_SIZE);
+    if (write(fd, buffer, I2C_CMD_PACKET_SIZE + 1) != I2C_CMD_PACKET_SIZE + 1) {
+        perror("I2C write of command");
+        close(fd);
         return CFE_STATUS_EXTERNAL_RESOURCE_FAIL;
     }
     fsync(fd);
-
+    sleep(1);
     return CFE_SUCCESS;
 }
 
@@ -212,7 +213,7 @@ int32 I2C_APP_Init(void)
         /*
         ** Open the I2C and set the corresponding file descriptor
         */
-        status = I2C_OPEN_BUS(1, &I2C_APP_Data.i2c_fd);
+        status = I2C_OPEN_BUS(2, &I2C_APP_Data.i2c_fd);
         if (status == -1) {
             CFE_EVS_SendEvent(I2C_APP_STARTUP_INF_EID, CFE_EVS_EventType_ERROR,
                 "I2C App: Error Registering Example Table, RC = 0x%08lX", (unsigned long)status);
@@ -368,9 +369,9 @@ int32 I2C_APP_Noop(const I2C_APP_NoopCmd_t *Msg)
     CFE_EVS_SendEvent(I2C_APP_COMMANDNOP_INF_EID, CFE_EVS_EventType_INFORMATION, "I2C: NOOP command %s",
                       I2C_APP_VERSION);
 
-        I2C_Command_Packet packet;
-        packet.right_speed = 100;
-        packet.left_speed = 100;
+        I2C_Command_Packet packet = {0};
+        packet.right_speed = 0xA0;
+        packet.left_speed = 0xA0;
 
         int res = I2C_APP_Send(I2C_APP_Data.i2c_fd, &packet);
         if (res == -1) {

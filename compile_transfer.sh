@@ -7,8 +7,9 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+EXEC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-make SIMULATION=arm-cortexa8_neon-linux-gnueabi prep
-make
-make install
-scp -r build/exe/cpu1 debian@"$1":~/
+make SIMULATION=arm-cortexa8_neon-linux-gnueabi prep;
+make;
+make install;
+scp -r "$EXEC_DIR"/build/exe/cpu1 debian@"$1":~/

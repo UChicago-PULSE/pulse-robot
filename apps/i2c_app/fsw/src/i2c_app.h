@@ -58,6 +58,9 @@
 #define I2C_APP_TABLE_OUT_OF_RANGE_ERR_CODE -1
 
 #define I2C_APP_TBL_ELEMENT_1_MAX 10
+
+#define I2C_PACKET_SIZE 36
+#define I2C_CMD_PACKET_SIZE 11
 /************************************************************************
 ** Type Definitions
 *************************************************************************/
@@ -127,6 +130,12 @@ typedef struct {
   bool button_B;
   bool button_C;
 } I2C_Telem_Packet;
+
+typedef struct {
+    I2C_Command_Packet cmd;    // 11 bytes
+    I2C_Telem_Packet telem;  // 25 bytes
+} I2C_Data;            // sizeof == 36
+
 
 
 
